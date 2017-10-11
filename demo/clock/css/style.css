@@ -1,0 +1,83 @@
+h1 {
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+}
+
+.dice {
+  border: 2px solid #FFF;
+  border-radius: 2px;
+  cursor: pointer;
+  height: 50px;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 50px;
+}
+
+.dice:active {
+  background: #FFF;
+}
+
+.dice:active .dot {
+  border-color: white;
+}
+
+.side {
+  height: 50px;
+  position: relative;
+  width: 100%;
+}
+
+.side:first-child {
+  margin-top: -00px;
+  transition: 2s;
+}
+
+.dot {
+  border: 2px solid #FFF;
+  border-radius: 50%;
+  height: 5px;
+  margin-top: -5px;
+  margin-left: -5px;
+  position: absolute;
+  width: 5px;
+}
+
+.dot.c {
+  top: 50%;
+  left: 50%;
+}
+
+.dot.tl {
+  top: 10px;
+  left: 10px;
+}
+
+.dot.tr {
+  margin-right: -6px;
+  top: 10px;
+  right: 10px;
+}
+
+.dot.cl {
+  top: 50%;
+  left: 10px;
+}
+
+.dot.cr {
+  margin-right: -6px;
+  top: 50%;
+  right: 10px;
+}
+
+.dot.bl {
+  margin-bottom: -6px;
+  left: 10px;
+  bottom: 10px;
+}
+
+.dot.br {
+  margin-right: -6px;
+  margin-bottom: -6px;
+  right: 10px;
+  bottom: 10px;
+}
