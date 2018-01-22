@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>加密解密</title>
+    <script src="https://zjlloveo0.github.io/static/js/DES/gbk.min.js"></script>
+    <script src="https://zjlloveo0.github.io/static/js/jquery.js"></script>
+    <script src="https://zjlloveo0.github.io/static/js/DES/tripledes2.min.js"></script>
+    <script src="https://zjlloveo0.github.io/static/js/DES/mode-ecb-min.js"></script>
+    <script>
+    jQuery(document).ready(function($) {
+        $('#bu1').click(function(e) {
+        	$('#txt2').val('');
+            $('#txt2').val(encryptByDES($('#txt1').val(), $('#txt3').val()==''?'950521':$('#txt3').val()));
+        });
+        $('#bu2').click(function(e) {
+        	$('#txt1').val('');
+            $('#txt1').val(decryptByDES($('#txt2').val(), $('#txt3').val()==''?'950521':$('#txt3').val()));
+        });
+    });
+
+    function encryptByDES(message, key) {
+        var keyHex = CryptoJS.enc.Utf8.parse(key);
+        message = CryptoJS.enc.GBK.parse(message);
+        var encrypted = CryptoJS.DES.encrypt(message, keyHex, {
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7
+        });
+        return encrypted.ciphertext.toString(CryptoJS.enc.Hex);
+    }
+
+    function decryptByDES(message, key) {        
+    	var keyHex = CryptoJS.enc.Utf8.parse(key);      
+	    var decrypted = CryptoJS.DES.decrypt({
+	        ciphertext: CryptoJS.enc.Hex.parse(message)
+	    }, keyHex, {
+	        mode: CryptoJS.mode.ECB,
+	        padding: CryptoJS.pad.Pkcs7
+	    });
+
+	    return decrypted.toString(CryptoJS.enc.GBK);
+	}
+    </script>
+    <script type="text/javascript">
+        /* 鼠标点击特效 */
+        var a_idx = 0;
+        var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正", "法治", "爱国", "敬业", "诚信", "友善");
+        jQuery(document).ready(function($) {
+            $("body").click(function(e) {
+                var $i = $("<span/>").text(a[a_idx]);
+                a_idx = (a_idx + 1) % a.length;
+                var x = e.pageX,
+                    y = e.pageY;
+                $i.css({
+                    "z-index": 999999999999999999999999999999999999999999999999999999999999999999999,
+                    "top": y - 20,
+                    "left": x,
+                    "position": "absolute",
+                    "font-weight": "bold",
+                    "color": "#ff6651"
+                });
+                $("body").append($i);
+                $i.animate({
+                        "top": y - 180,
+                        "opacity": 0
+                    },
+                    1500,
+                    function() {
+                        $i.remove();
+                    });
+            });
+        });
+    </script>    
+</head>
+
+<body>
+    <textarea id="txt1" style="min-width: 500px;min-height: 200px">123</textarea>
+    <br>
+    <textarea id="txt2" style="min-width: 500px;min-height: 200px"></textarea>
+    <br>
+    <input type="text" id="txt3">
+    <input type="button" id="bu1" value="加密">&nbsp;
+    <input type="button" id="bu2" value="解密">
+    <br>
+    <input type="button" id="bu3" value="打开震动">
+    <script src="https://zjlloveo0.github.io/static/js/activate-power-mode.js"></script>
+    <script>
+    POWERMODE.colorful = true; // 控制开启/开启礼花特效  
+    POWERMODE.shake = false; // 控制开启/关闭屏幕震动特效  
+    document.body.addEventListener('textarea', POWERMODE);
+    document.body.addEventListener('input', POWERMODE);
+    //document.body.addEventListener('click', POWERMODE);
+    $('#bu3').click(function(e){
+        var a=true;
+        if(POWERMODE.shake){
+            a=false;
+            $('#bu3').val('打开震动');
+        }else{
+            a=true;
+            $('#bu3').val('关闭震动');
+        }
+        POWERMODE.colorful = true;
+        POWERMODE.shake = a;
+        document.body.addEventListener('textarea', POWERMODE);
+        document.body.addEventListener('input', POWERMODE);
+        //document.body.addEventListener('click', POWERMODE);        
+    });
+    </script>
+</body>
+
+</html>
