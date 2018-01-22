@@ -12,11 +12,11 @@
     jQuery(document).ready(function($) {
         $('#bu1').click(function(e) {
         	$('#txt2').val('');
-            $('#txt2').val(encryptByDES($('#txt1').val(), $('#txt3').val()==''?'950521':$('#txt3').val()));
+            $('#txt2').val(encryptByDES($('#txt1').val(), $('#txt3').val()==''?'123':$('#txt3').val()));
         });
         $('#bu2').click(function(e) {
         	$('#txt1').val('');
-            $('#txt1').val(decryptByDES($('#txt2').val(), $('#txt3').val()==''?'950521':$('#txt3').val()));
+            $('#txt1').val(decryptByDES($('#txt2').val(), $('#txt3').val()==''?'123':$('#txt3').val()));
         });
     });
 
