@@ -42,6 +42,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     });
     </script>
     <!-- start-smoth-scrolling -->
+    <script>
+        $(function(){
+            $.ajax({
+                url:'http://r.pengyou.com/fcg-bin/cgi_get_portrait.fcg?uins=1357423913&callback=portraitCallBack',
+                type:'POST', //GET
+                async:true,    //或false,是否异步
+                data:"{}",
+                scriptCharset: "GBK",
+                timeout:5000,    //超时时间
+                dataType:'jsonp'   //返回的数据格式：json/xml/html/script/jsonp/text
+            });
+        });
+        function portraitCallBack(json) {
+            var qqname=json['1357423913'][6];
+            $("#qqname").attr('data-letters',qqname); 
+            $('#qqname').text(qqname);
+        }
+    </script>
 </head>
 
 <body>
@@ -55,7 +73,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="col-md-4 navigation">
                     <div class="nav-left">
                         <div class="grid__item color-4">
-                            <a class="link link--kumya" href="https://github.com/zjlloveo0"  target="_blank"><span data-letters="晚安">晚安</span></a>
+                            <a class="link link--kumya" href="https://github.com/zjlloveo0"  target="_blank"><span id="qqname" data-letters="晚安">晚安</span></a>
                         </div>
                     </div>
                     <div class="nav-right">
