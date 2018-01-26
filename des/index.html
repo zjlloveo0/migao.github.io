@@ -8,6 +8,7 @@
     <script src="https://zjlloveo0.github.io/static/js/jquery.js"></script>
     <script src="https://zjlloveo0.github.io/static/js/DES/tripledes2.min.js"></script>
     <script src="https://zjlloveo0.github.io/static/js/DES/mode-ecb-min.js"></script>
+    <script src="https://zjlloveo0.github.io/static/js/girls/girls.js"></script>
     <script>
     jQuery(document).ready(function($) {
         $('#bu1').click(function(e) {
@@ -17,6 +18,13 @@
         $('#bu2').click(function(e) {
         	$('#txt1').val('');
             $('#txt1').val(decryptByDES($('#txt2').val(), $('#txt3').val()==''?'123':$('#txt3').val()));
+        });
+                
+        $('#txt1').on('keydown keyup',function(){
+            $('#countTxt1').text($('#txt1').val().length);
+        });
+        $('#txt2').on('keydown keyup',function(){
+            $('#countTxt2').text($('#txt2').val().length);
         });
     });
 
@@ -72,12 +80,57 @@
             });
         });
     </script>    
+    <style type="text/css">
+        .spig {
+            display: block;
+            width: 150px;
+            height: 190px;
+            position: absolute;
+            top: -200px;
+            left: 160px;
+            z-index: 9999;
+        }
+
+        #message {
+            color: #191919;
+            border: 1px solid #c4c4c4;
+            background: #ddd;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            min-height: 1em;
+            padding: 5px;
+            top: -30px;
+            position: absolute;
+            text-align: center;
+            width: auto !important;
+            z-index: 10000;
+            -moz-box-shadow: 0 0 15px #eeeeee;
+            -webkit-box-shadow: 0 0 15px #eeeeee;
+            border-color: #eeeeee;
+            box-shadow: 0 0 15px #eeeeee;
+            outline: none;
+        }
+
+        .mumu {
+            width: 150px;
+            height: 190px;
+            cursor: move;
+            background: url(https://zjlloveo0.github.io/static/img/t_spig.png) no-repeat;
+        }
+    </style>
 </head>
 
 <body>
+    <div id="spig" class="spig" style="top: 190px; left: 719.95px;">
+        <div id="message" style="display: block; opacity: 1;"></div>
+        <div id="mumu" class="mumu" style="opacity: 1;"></div>
+    </div>
     <textarea id="txt1" style="min-width: 500px;min-height: 200px" placeholder="明文"></textarea>
+    <span id="countTxt1">0</span>
     <br>
     <textarea id="txt2" style="min-width: 500px;min-height: 200px" placeholder="密文"></textarea>
+    <span id="countTxt2">0</span>
     <br>
     <input type="text" id="txt3" placeholder="盐">
     <input type="button" id="bu1" value="加密">&nbsp;
