@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>活动页面1</title>
+	<script type="text/javascript" src="https://zjlloveo0.github.io/static/js/jquery.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			var href = $('#login').attr('href');
+			var url = window.location.href;
+			$('#login').attr('href', href + '?redirect=' + encodeURIComponent(url));
+		});
+	</script>		
+</head>
+<body>
+	<a id="login" href="login.html">登录</a>
+	
+</body>
+</html>
