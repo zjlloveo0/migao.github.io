@@ -6,14 +6,22 @@
 	<script type="text/javascript" src="https://zjlloveo0.github.io/static/js/jquery.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			var href = $('#login').attr('href');
 			var url = window.location.href;
-			$('#login').attr('href', href + '?redirect=' + encodeURIComponent(url));
+			var lists=$('.login').each(function() {
+				var href = $(this).attr('href');
+				if(href.indexOf("?") == -1){
+					$(this).attr('href', href + '?actredirect=' + encodeURIComponent(url));
+				}else {
+					$(this).attr('href', href + '&actredirect=' + encodeURIComponent(url));
+				}
+			});
 		});
 	</script>		
 </head>
 <body>
-	<a id="login" href="login.html">登录</a>
-	
+	<a class="login" href="http://dractest.szlanyou.com/wap/business/car/carbind/car_bind.html?storeid=PV">登录car_bind.html?storeid=PV</a><br/>
+	<a class="login" href="http://dractest.szlanyou.com/wap/business/car/carbind/car_bind.html">登录car_bind.html</a><br/>
+	<a class="login" href="http://dractest.szlanyou.com/wap/business/car/usercenter/uc_potential.html">登录uc_potential.html</a><br/>
+	<a class="login" href="http://dractest.szlanyou.com/wap/business/car/carbind/car_want_buy.html?code=&storeid=PV">登录car_want_buy.html?code=&storeid=PV</a><br/>
 </body>
 </html>
