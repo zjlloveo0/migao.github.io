@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>活动页面2</title>
+	<script type="text/javascript" src="https://zjlloveo0.github.io/static/js/jquery.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			var url = window.location.href;
+			$('.login').each(function() {
+				var href = $(this).attr('href');
+				if(href.indexOf("?") == -1){
+					$(this).attr('href','http://test.wechat.dongfeng-renault.com.cn/api/wap/wechat?requesttype=JK0064&storeid=PV&redirecturl='+encodeURIComponent(href + '?actredirect=' + encodeURIComponent(url)));
+				}else {
+					$(this).attr('href', 'http://test.wechat.dongfeng-renault.com.cn/api/wap/wechat?requesttype=JK0064&storeid=PV&redirecturl='+encodeURIComponent(href + '&actredirect=' + encodeURIComponent(url)));
+				}
+			});
+			$('.login2').each(function() {
+				var href = $(this).attr('href');
+				if(href.indexOf("?") == -1){
+					$(this).attr('href',href + '?actredirect=' + encodeURIComponent(url));
+				}else {
+					$(this).attr('href', href + '&actredirect=' + encodeURIComponent(url));
+				}
+			});			
+		});
+	</script>	
+	<style type="text/css">
+		a{
+			font-size: 50px;
+		}
+	</style>	
+</head>
+<body>
+	<a class="login" href="http://test.wechat.dongfeng-renault.com.cn/wap/business/car/carbind/car_bind.html?storeid=PV">活动跳转测试1</a><br/>
+	<a class="login" href="http://test.wechat.dongfeng-renault.com.cn/wap/business/car/carbind/car_bind.html">活动跳转测试2</a><br/>
+	<a class="login" href="http://test.wechat.dongfeng-renault.com.cn/wap/business/car/usercenter/uc_potential.html">活动跳转测试3</a><br/>
+	<a class="login" href="http://test.wechat.dongfeng-renault.com.cn/wap/business/car/carbind/car_want_buy.html?code=&storeid=PV">活动跳转测试4</a><br/>
+
+
+</body>
+</html>
