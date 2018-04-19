@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>活动页面1</title>
+	<script type="text/javascript" src="https://zjlloveo0.github.io/static/js/jquery.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			var url = window.location.href;
+			$('.login').each(function() {
+				var href = $(this).attr('href');
+				if(href.indexOf("?") == -1){
+					$(this).attr('href','http://dractest.szlanyou.com/api/wap/wechat?requesttype=JK0064&storeid=PV&redirecturl='+encodeURIComponent(href + '?actredirect=' + encodeURIComponent(url)));
+				}else {
+					$(this).attr('href', 'http://dractest.szlanyou.com/api/wap/wechat?requesttype=JK0064&storeid=PV&redirecturl='+encodeURIComponent(href + '&actredirect=' + encodeURIComponent(url)));
+				}
+			});
+			$('.login2').each(function() {
+				var href = $(this).attr('href');
+				if(href.indexOf("?") == -1){
+					$(this).attr('href',href + '?actredirect=' + encodeURIComponent(url));
+				}else {
+					$(this).attr('href', href + '&actredirect=' + encodeURIComponent(url));
+				}
+			});			
+		});
+	</script>	
+	<style type="text/css">
+		a{
+			font-size: 50px;
+		}
+	</style>	
+</head>
+<body>
+	<a class="login" href="http://dractest.szlanyou.com/wap/business/car/carbind/car_bind.html?storeid=PV">登录car_bind.html?storeid=PV</a><br/>
+	<a class="login" href="http://dractest.szlanyou.com/wap/business/car/carbind/car_bind.html">登录car_bind.html</a><br/>
+	<a class="login" href="http://dractest.szlanyou.com/wap/business/car/usercenter/uc_potential.html">登录uc_potential.html</a><br/>
+	<a class="login" href="http://dractest.szlanyou.com/wap/business/car/carbind/car_want_buy.html?code=&storeid=PV">登录car_want_buy.html?code=&storeid=PV</a><br/>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+	<a class="login2" href="http://dractest.szlanyou.com/wap/business/car/carbind/car_bind.html?storeid=PV">登录2car_bind.html?storeid=PV</a><br/>
+	<a class="login2" href="http://dractest.szlanyou.com/wap/business/car/carbind/car_bind.html">登录2car_bind.html</a><br/>
+	<a class="login2" href="http://dractest.szlanyou.com/wap/business/car/usercenter/uc_potential.html">登录2uc_potential.html</a><br/>
+	<a class="login2" href="http://dractest.szlanyou.com/wap/business/car/carbind/car_want_buy.html?code=&storeid=PV">登录2car_want_buy.html?code=&storeid=PV</a><br/>	
+</body>
+</html>
