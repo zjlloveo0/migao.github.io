@@ -19,8 +19,8 @@
 			$('#btn1').on('click',function () {
 				var checkUrl="/api/wap/wechat?requesttype=JK0064&storeid=PV&redirecturl=";
 				var regUrl="/wap/business/car/carbind/car_want_buy.html?code=&storeid=PV&actredirect=";
-				var host=$('#txt1').val();
-				var goalUrl=$('#txt2').val();
+				var host=$('#txt1').val().trim();
+				var goalUrl=$('#txt2').val().trim();
 				if(isNotNull(host)&&isNotNull(goalUrl)){
 					$('#txt3').val(host+checkUrl+encodeURIComponent(host+regUrl+encodeURIComponent(goalUrl)));
 				}else{
