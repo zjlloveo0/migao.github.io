@@ -6,37 +6,66 @@
 	<script type="text/javascript" src="https://zjlloveo0.github.io/static/js/jquery.js"></script>
 	<script type="text/javascript">
 		$(function() {
-			var url = window.location.href;
-			$('.login').each(function() {
-				var href = $(this).attr('href');
-				if(href.indexOf("?") == -1){
-					$(this).attr('href','http://test.wechat.dongfeng-renault.com.cn/api/wap/wechat?requesttype=JK0064&storeid=PV&redirecturl='+encodeURIComponent(href + '?actredirect=' + encodeURIComponent(url)));
-				}else {
-					$(this).attr('href', 'http://test.wechat.dongfeng-renault.com.cn/api/wap/wechat?requesttype=JK0064&storeid=PV&redirecturl='+encodeURIComponent(href + '&actredirect=' + encodeURIComponent(url)));
+			// var url = window.location.href;
+			// $('.login').each(function() {
+			// 	var href = $(this).attr('href');
+			// 	if(href.indexOf("?") == -1){
+			// 		$(this).attr('href','http://test.wechat.dongfeng-renault.com.cn/api/wap/wechat?requesttype=JK0064&storeid=PV&redirecturl='+encodeURIComponent(href + '?actredirect=' + encodeURIComponent(url)));
+			// 	}else {
+			// 		$(this).attr('href', 'http://test.wechat.dongfeng-renault.com.cn/api/wap/wechat?requesttype=JK0064&storeid=PV&redirecturl='+encodeURIComponent(href + '&actredirect=' + encodeURIComponent(url)));
+			// 	}
+			// });
+			
+			$('#btn1').on('click',function () {
+				var checkUrl="/api/wap/wechat?requesttype=JK0064&storeid=PV&redirecturl=";
+				var regUrl="/wap/business/car/carbind/car_want_buy.html?code=&storeid=PV&actredirect=";
+				var host=$('#txt1').val();
+				var goalUrl=$('#txt2').val();
+				if(isNotNull(host)&&isNotNull(goalUrl)){
+					$('#txt3').val(host+checkUrl+encodeURIComponent(host+regUrl+encodeURIComponent(goalUrl)));
+				}else{
+					alert("请输入");
 				}
 			});
-			$('.login2').each(function() {
-				var href = $(this).attr('href');
-				if(href.indexOf("?") == -1){
-					$(this).attr('href',href + '?actredirect=' + encodeURIComponent(url));
-				}else {
-					$(this).attr('href', href + '&actredirect=' + encodeURIComponent(url));
-				}
-			});			
 		});
+		//获取url中的参数
+		function getQueryString() {  
+			var qs = location.search.substr(1), // 获取url中"?"符后的字串  
+		    args = {}, // 保存参数数据的对象
+		    items = qs.length ? qs.split("&") : [], // 取得每一个参数项,
+		    item = null,
+		    len = items.length;
+			for(var i = 0; i < len; i++) {
+				item = items[i].split("=");
+				var name = decodeURIComponent(item[0]),
+			  	value = decodeURIComponent(item[1]);
+				if(name) {
+					args[name] = value;
+				}
+			}
+			return args;
+		}
+		function isNotNull(varString) {
+			return (varString!==null&&varString!==undefined&&varString!=="");
+		}
+		var args=getQueryString();
+		if(isNotNull(args['card_no'])){
+			alert('注册成功，卡号为：'+args['card_no']);
+		}
 	</script>	
 	<style type="text/css">
 		a{
-			font-size: 50px;
+			font-size: 25px;
 		}
 	</style>	
 </head>
 <body>
-	<a class="login" href="http://test.wechat.dongfeng-renault.com.cn/wap/business/car/carbind/car_bind.html?storeid=PV">活动跳转测试1</a><br/>
-	<a class="login" href="http://test.wechat.dongfeng-renault.com.cn/wap/business/car/carbind/car_bind.html">活动跳转测试2</a><br/>
-	<a class="login" href="http://test.wechat.dongfeng-renault.com.cn/wap/business/car/usercenter/uc_potential.html">活动跳转测试3</a><br/>
-	<a class="login" href="http://test.wechat.dongfeng-renault.com.cn/wap/business/car/carbind/car_want_buy.html?code=&storeid=PV">活动跳转测试4</a><br/>
+	<textarea id="txt1" style="min-width: 500px;min-height: 50px" placeholder="雷诺微信域名"></textarea><br>
+	<textarea id="txt2" style="min-width: 500px;min-height: 50px" placeholder="活动地址（成功后跳转目的URL）"></textarea>
+	<input id="btn1" type="button" name="submit" value="生成"><br><br>
+	<textarea id="txt3" style="min-width: 500px;min-height: 100px" placeholder="最终调用地址"></textarea><br>
 
-
+<!-- 
+	<a class="login" href="http://test.wechat.dongfeng-renault.com.cn/wap/business/car/carbind/car_want_buy.html?code=&storeid=PV">活动跳转测试(业务测试环境)</a><br/> -->
 </body>
 </html>
