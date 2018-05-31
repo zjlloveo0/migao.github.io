@@ -15,10 +15,9 @@
 			// 		$(this).attr('href', 'http://test.wechat.dongfeng-renault.com.cn/api/wap/wechat?requesttype=JK0064&storeid=PV&redirecturl='+encodeURIComponent(href + '&actredirect=' + encodeURIComponent(url)));
 			// 	}
 			// });
-			
 			$('#btn1').on('click',function () {
 				var checkUrl="/api/wap/wechat?requesttype=JK0064&storeid=PV&redirecturl=";
-				var regUrl="/wap/business/car/carbind/car_want_buy.html?code=&storeid=PV&actredirect=";
+				var regUrl="/wap/business/car/carbind/car_bind.html?code=&storeid=PV&actredirect=";
 				var host=$('#txt1').val().trim();
 				var goalUrl=$('#txt2').val().trim();
 				if(isNotNull(host)&&isNotNull(goalUrl)){
