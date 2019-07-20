@@ -18,7 +18,9 @@
             return(false);
         }
         if(getQueryVariable("id")==1){
-            window.location.href="https://www.baidu.com";
+            setTimeout( function(){
+                window.location.href="https://www.baidu.com";
+            }, 1000 );
         }
     </script>
 </head>
