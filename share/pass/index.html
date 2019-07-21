@@ -10,27 +10,53 @@
     <script src="./js/script.js"></script>
     <script type="text/javascript" src="./js/xlsx.core.min.js"></script>
     <script type="text/javascript">
-        function getQueryVariable(variable){
-            var query = window.location.search.substring(1);
-            var vars = query.split("&");
-            for (var i=0;i<vars.length;i++) {
-               var pair = vars[i].split("=");
-               if(pair[0] == variable){return pair[1];}
+    function readWorkbookFromRemoteFile(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', url, true);
+        xhr.responseType = 'arraybuffer';
+        xhr.onload = function(e) {
+            if (xhr.status == 200) {
+                var data = new Uint8Array(xhr.response) var workbook = XLSX.read(data, { type: 'array' });
+                if (callback) callback(workbook);
             }
-            return(false);
+        };
+        xhr.send();
+    }
+    // 读取本地excel文件
+    function readWorkbookFromLocalFile(file, callback) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var data = e.target.result;
+            var workbook = XLSX.read(data, {type: 'binary'});
+            if(callback) callback(workbook);
+        };
+        reader.readAsBinaryString(file);
+    }
+
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) { return pair[1]; }
         }
-        window.onload=function (){
-            if(getQueryVariable("id")==1){
-                setTimeout( function(){
-                    window.location.href="https://www.baidu.com";
-                }, 1000 );
-            }
+        return (false);
+    }
+    window.onload = function() {
+        if (getQueryVariable("id") == 1) {
+            setTimeout(function() {
+                window.location.href = "https://www.baidu.com";
+            }, 1000);
         }
+    }
+    
+    readWorkbookFromRemoteFile("http://zjlloveo0.github.io/share/pass/file/excel/%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%E5%AF%86%E7%A0%81.xlsm",function callback(workbook){
+        console.log(workbook);
+    });
     </script>
 </head>
 
 <body>
-    
     <svg id="approved" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650.6 650.6">
         <circle class="st0" cx="325.3" cy="325.3" r="323.3" />
         <path class="st1" d="M96.9 274.5l6.1 11.1 11.2 6.1-11.2 6.2-6.1 11.1-6.1-11.1-11.2-6.2 11.2-6.1z" />
@@ -53,4 +79,5 @@
     </svg>
     <p><a href="https://www.youtube.com/watch?v=cU5VXiiqFJQ" target="_blank">更多资源下载</a></p>
 </body>
+
 </html>
