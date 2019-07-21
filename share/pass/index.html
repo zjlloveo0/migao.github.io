@@ -6,19 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>勤奋的LL学院🚀</title>
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="./css/style2.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
+    <script src="./js/xlsx.core.min.js"></script>
+    <script src='./js/jquery.min.js'></script>
+    <script src='./js/handlebars.min.js'></script>
     <script src="./js/script.js"></script>
-    <script type="text/javascript" src="./js/xlsx.core.min.js"></script>
     <script type="text/javascript">
+    // 从网络上读取某个excel文件，url必须同域，否则报错
     function readWorkbookFromRemoteFile(url, callback) {
         var xhr = new XMLHttpRequest();
         xhr.open('get', url, true);
         xhr.responseType = 'arraybuffer';
         xhr.onload = function(e) {
-            if(xhr.status == 200) {
+            if (xhr.status == 200) {
                 var data = new Uint8Array(xhr.response);
-                var workbook = XLSX.read(data, {type: 'array'});
-                if(callback) callback(workbook);
+                var workbook = XLSX.read(data, { type: 'array' });
+                if (callback) callback(workbook);
             }
         };
         xhr.send();
@@ -28,8 +32,8 @@
         var reader = new FileReader();
         reader.onload = function(e) {
             var data = e.target.result;
-            var workbook = XLSX.read(data, {type: 'binary'});
-            if(callback) callback(workbook);
+            var workbook = XLSX.read(data, { type: 'binary' });
+            if (callback) callback(workbook);
         };
         reader.readAsBinaryString(file);
     }
@@ -50,14 +54,64 @@
             }, 1000);
         }
     }
-    
-    readWorkbookFromRemoteFile("https://zjlloveo0.github.io/share/pass/file/excel/%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB%E5%AF%86%E7%A0%81.xlsm",function callback(workbook){
+
+    function readWorkbook(workbook) {
+        var sheetNames = workbook.SheetNames; // 工作表名称集合
+        var worksheet = workbook.Sheets[sheetNames[2]]; // 这里我们只读取第3张sheet
+        var csv = XLSX.utils.sheet_to_csv(worksheet);
+        document.getElementById('list').innerHTML = csv2table(csv);
+    }
+
+    // 将csv转换成表格
+    function csv2table(csv) {
+        var html = '<table>';
+        var rows = csv.split('\n');
+        rows.pop(); // 最后一行没用的
+        rows.forEach(function(row, idx) {
+            var columns = row.split(',');
+            columns.unshift(idx + 1); // 添加行索引
+            if (idx == 0) { // 添加列索引
+                html += '<tr>';
+                for (var i = 0; i < columns.length; i++) {
+                    html += '<th>' + (i == 0 ? '' : String.fromCharCode(65 + i - 1)) + '</th>';
+                }
+                html += '</tr>';
+            }
+            html += '<tr>';
+            columns.forEach(function(column) {
+                html += '<td>' + column + '</td>';
+            });
+            html += '</tr>';
+        });
+        html += '</table>';
+        return html;
+    }
+    readWorkbookFromRemoteFile("https://zjlloveo0.github.io/share/pass/file/excel/资源共享密码.xlsm", function callback(workbook) {
         console.log(workbook);
+        readWorkbook(workbook);
     });
     </script>
 </head>
 
 <body>
+    <div class="container">
+        <div id="test"></div>
+    </div>
+    <script id="tmpl-person" type="text/x-handlebars-template">
+        <div class="person">
+        <div class="person__header">
+            <div class="person__title-container">
+                <h3 class="person__name">{{lastName}}, {{firstName}}</h3>
+                <h4 class="person__title">{{title}}</h4>
+            </div>
+            <div class="person__pic" style="background-image:url('{{pic}}')"></div>
+        </div>
+        <div class="person__details">
+            <p class="person__mail"><i class="fa fa-at person__icon"></i>{{mail}}</p>
+            <p class="person__phone"><i class="fa fa-phone person__icon"></i>{{phone}}</p>
+        </div>
+    </div>
+</script>
     <svg id="approved" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650.6 650.6">
         <circle class="st0" cx="325.3" cy="325.3" r="323.3" />
         <path class="st1" d="M96.9 274.5l6.1 11.1 11.2 6.1-11.2 6.2-6.1 11.1-6.1-11.1-11.2-6.2 11.2-6.1z" />
