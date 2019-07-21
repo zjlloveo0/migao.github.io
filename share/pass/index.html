@@ -57,13 +57,30 @@
 
     function readWorkbook(workbook) {
         var sheetNames = workbook.SheetNames; // 工作表名称集合
-        var worksheet = workbook.Sheets[sheetNames[2]]; // 这里我们只读取第3张sheet
+        var worksheet = workbook.Sheets[sheetNames[0]]; // 这里我们只读取第1张sheet
         var csv = XLSX.utils.sheet_to_csv(worksheet);
-        document.getElementById('list').innerHTML = csv2table(csv);
+        // document.getElementById('list').innerHTML = csv2table(csv);
+        
+        var cfg = {
+            data: csv2table(csv),
+            searchFields: ["id", "name", "desc"],
+            showSearchbar: true,
+            itemTemplate: "tmpl-item"
+        }
+        // $("#test").searchList(cfg);
+        console.log(csv2table(csv));
     }
 
     // 将csv转换成表格
     function csv2table(csv) {
+    //     var  params = [];  
+    //     for(var i = 0; i < 3; i++){  
+    //         params.push({"group":i,"param":1});  
+    //     }  
+    //       
+    //     var json = JSON.stringify(params); 
+
+
         var html = '<table>';
         var rows = csv.split('\n');
         rows.pop(); // 最后一行没用的
@@ -74,12 +91,14 @@
                 html += '<tr>';
                 for (var i = 0; i < columns.length; i++) {
                     html += '<th>' + (i == 0 ? '' : String.fromCharCode(65 + i - 1)) + '</th>';
+                    console.log((i == 0 ? '' : String.fromCharCode(65 + i - 1)));
                 }
                 html += '</tr>';
             }
             html += '<tr>';
             columns.forEach(function(column) {
                 html += '<td>' + column + '</td>';
+                console.log(column);
             });
             html += '</tr>';
         });
@@ -89,6 +108,10 @@
     readWorkbookFromRemoteFile("https://zjlloveo0.github.io/share/pass/file/excel/资源共享.xlsm", function callback(workbook) {
         console.log(workbook);
         readWorkbook(workbook);
+    });
+    
+    $(function(){
+        
     });
     </script>
 </head>

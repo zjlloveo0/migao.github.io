@@ -131,14 +131,3 @@ $.fn.searchList = function(config){
 	$container.append($search);
 	$container.append($items);
 }
-
-var cfg = {
-	data: data,
-	searchFields: ["firstName", "lastName", "title"],
-	showSearchbar: true,
-	itemTemplate: "tmpl-item"
-}
-
-$(function(){
-	$("#test").searchList(cfg);
-})
