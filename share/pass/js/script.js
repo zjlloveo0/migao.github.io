@@ -2,7 +2,7 @@ $.fn.searchList = function(config){
 	var $container = $(this);	
 	var $search = $("<div class='search-list__search-bar'>")
 	var $items = $("<div class='search-list__items'>");
-	var $input = $("<input type='text' class='search-list__input' placeholder='搜索' />")
+	var $input = $("<input type='text' class='search-list__input' placeholder='搜索更多资源' />")
 	$container.addClass("search-list");
 	$container.empty();
 	
@@ -15,9 +15,9 @@ $.fn.searchList = function(config){
 		search: function(str){
 			var items = $container.data("searchList").items();
 			var searchFields = $container.data("searchList").searchFields;
-			if(!str)
+			if(!str){
 				items.show();
-			else{
+			} else {
 				items.each(function(){
 					var hide = true;
 					var item = $(this);
