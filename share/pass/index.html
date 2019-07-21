@@ -63,6 +63,7 @@
         this.imgUrl = imgUrl;
         this.qrCodeUrl = qrCodeUrl;
     }
+    var url = "";
     function readWorkbook(workbook) {
         var sheetNames = workbook.SheetNames; // 工作表名称集合
         var worksheet = workbook.Sheets[sheetNames[0]]; // 这里我们只读取第1张sheet
@@ -76,6 +77,11 @@
             itemTemplate: "tmpl-item"
         }
         $("#test").searchList(cfg);
+        if ("" != url) {
+            setTimeout(function() {
+                window.location.href = url;
+            }, 1000);
+        }
     }
 
     // 将csv转换成json
@@ -109,7 +115,13 @@
                         case 'NAME':myResourse.name = columns[i];break;
                         case 'DESC':myResourse.desc = columns[i];break;
                         case 'FILEURL':myResourse.fileUrl = columns[i];break;
-                        case 'SHOPURL':myResourse.shopUrl = columns[i];break;
+                        case 'SHOPURL':myResourse.shopUrl = columns[i];
+                            if(getQueryVariable("id") == myResourse.id){
+                                url = columns[i];
+                            } else {
+                                url = "";
+                            }
+                            break;
                         case 'IMGURL':myResourse.imgUrl = columns[i];break;
                         case 'QRCODEURL':myResourse.qrCodeUrl = columns[i];break;
                         default:break;
@@ -136,9 +148,12 @@
                 <div class="item__pic" style="background-image:url('{{imgUrl}}')"></div>
                 <div class="item__title-container">
                     <h6 class="item__name">{{name}}</h3>
-                    <h7 class="item__title">{{desc}}</h4>
-                    <p><a href="{{fileUrl}}" target="_blank">更多资源下载</a></p>
+                    
+                    <p><a href="{{fileUrl}}" target="_blank">前往下载</a></p>
                 </div>
+            </div>
+            <div class="item__details">
+                <h7 class="item__title">{{desc}}</h4>
             </div>
         </div>
     </script>

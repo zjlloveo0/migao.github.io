@@ -31,11 +31,12 @@ html {
 .search-list__input {
   width: 100%;
   border: none;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid white;
   padding: 3px 6px;
   transition: border-color .2s linear;
   background-color: transparent;
-  font-size: 2rem;
+  font-size: 3rem;
+  color:white;
 }
 .search-list__input:focus {
   border-color: dodgerblue;
@@ -53,6 +54,7 @@ html {
 .item {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   background: linear-gradient(135deg, #fff 0%, #fff 50%, rgba(0, 200, 200, 0.4) 50.5%, rgba(0, 200, 200, 0.6) 100%);
+  background-color: white;
   border-radius: 3px;
   max-width: 100%;
   width: 350px;
@@ -89,7 +91,7 @@ html {
   font-size: 2rem;
 }
 .item__title {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: 400;
   margin: 0;
   padding: 0;
@@ -101,6 +103,10 @@ html {
 .item__icon {
   margin-right: 1rem;
 }
-.item__details > p:not(:last-child) {
-  margin: 0 0 12px 0;
+.item__title-container p {
+  text-align: right;
+}
+.item__title-container a {
+  color: blue;
+  font-size: 13px;
 }

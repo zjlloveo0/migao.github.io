@@ -2,7 +2,7 @@ $.fn.searchList = function(config){
 	var $container = $(this);	
 	var $search = $("<div class='search-list__search-bar'>")
 	var $items = $("<div class='search-list__items'>");
-	var $input = $("<input type='text' class='search-list__input' placeholder='Search' />")
+	var $input = $("<input type='text' class='search-list__input' placeholder='搜索' />")
 	$container.addClass("search-list");
 	$container.empty();
 	
