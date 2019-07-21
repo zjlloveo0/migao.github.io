@@ -1,12 +1,28 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  font-size: 10px;
+  background-color: whitesmoke;
+}
+
 body {
+  height: 100%;
   background-color: #1f2740;
   text-align: center;
   margin: 0px auto;
+  font-size: 1.6rem;
+  font-family: Montserrat, sans-serif;
 }
 
 svg {
   /*margin: 20px 20px 10px;*/
-  width: 300px;
+  width: 150px;
 }
 
 a {
@@ -100,4 +116,104 @@ a {
   80% {
     transform: translateY(2%);
   }
+}
+.first{
+  height: 30%;
+}
+
+
+.container {
+  width: 1145px;
+  max-width: 100%;
+  padding: 0 12px;
+  margin: 0 auto;
+}
+
+.search-list {
+  /*margin: 12px 0;*/
+}
+.search-list__search-bar {
+  margin-bottom: 12px;
+}
+.search-list__input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid white;
+  padding: 3px 6px;
+  transition: border-color .2s linear;
+  background-color: transparent;
+  font-size: 3rem;
+  color:white;
+}
+.search-list__input:focus {
+  border-color: dodgerblue;
+  outline: none;
+}
+.search-list__items {
+  display: flex;
+  flex-wrap: wrap;
+}
+.search-list__item {
+  margin-right: 12px;
+  margin-bottom: 12px;
+}
+
+.item {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: linear-gradient(135deg, #fff 0%, #fff 50%, rgba(0, 200, 200, 0.4) 50.5%, rgba(0, 200, 200, 0.6) 100%);
+  background-color: white;
+  border-radius: 3px;
+  max-width: 100%;
+  width: 350px;
+}
+.item__header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 5px;
+}
+.item__pic {
+  width: 7.5rem;
+  min-width: 7.5rem;
+  height: 7.5rem;
+  min-height: 7.5rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /*border-radius: 100%;*/
+  margin-left: 0px;
+  /*border: 2px solid white;*/
+}
+.item__title-container {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  width: 250px;
+  text-align: left;
+  padding-left: 10px;
+}
+.item__name {
+  margin: 0;
+  padding: 0;
+  font-size: 2rem;
+}
+.item__title {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+.item__details {
+  justify-content: space-between;
+  padding: 12px;
+}
+.item__icon {
+  margin-right: 1rem;
+}
+.item__title-container p {
+  text-align: right;
+}
+.item__title-container a {
+  color: blue;
+  font-size: 13px;
 }

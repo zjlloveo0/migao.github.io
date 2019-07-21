@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>勤奋的LL学院🚀</title>
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/style2.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
     <script src="./js/xlsx.core.min.js"></script>
     <script src='./js/jquery.min.js'></script>
     <script src='./js/handlebars.min.js'></script>
@@ -118,8 +116,6 @@
                         case 'SHOPURL':myResourse.shopUrl = columns[i];
                             if(getQueryVariable("id") == myResourse.id){
                                 url = columns[i];
-                            } else {
-                                url = "";
                             }
                             break;
                         case 'IMGURL':myResourse.imgUrl = columns[i];break;
@@ -139,9 +135,10 @@
 </head>
 
 <body>
-    <div class="container">
-        <div id="test"></div>
+    <<div class="first">
+        
     </div>
+    
     <script id="tmpl-item" type="text/x-handlebars-template">
         <div class="item">
             <div class="item__header">
@@ -177,7 +174,11 @@
         <circle class="st4" cx="360.9" cy="550.9" r="15.5" />
         <circle class="st4" cx="287.8" cy="594.8" r="26.9" />
     </svg>
-    <p><a href="https://www.youtube.com/watch?v=cU5VXiiqFJQ" target="_blank">更多资源下载</a></p>
+    <!-- <p><a href="https://www.youtube.com/watch?v=cU5VXiiqFJQ" target="_blank">更多资源下载</a></p> -->
+    <div class="container">
+        <div id="test"></div>
+    </div>
+
 </body>
 
 </html>
