@@ -54,64 +54,74 @@
             }, 1000);
         }
     }
-
+    function MyResourse(id,name,desc,fileUrl,shopUrl,imgUrl,qrCodeUrl){
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+        this.fileUrl = fileUrl;
+        this.shopUrl = shopUrl;
+        this.imgUrl = imgUrl;
+        this.qrCodeUrl = qrCodeUrl;
+    }
     function readWorkbook(workbook) {
         var sheetNames = workbook.SheetNames; // 工作表名称集合
         var worksheet = workbook.Sheets[sheetNames[0]]; // 这里我们只读取第1张sheet
         var csv = XLSX.utils.sheet_to_csv(worksheet);
-        // document.getElementById('list').innerHTML = csv2table(csv);
+        // document.getElementById('list').innerHTML = csv2Json(csv);
         
         var cfg = {
-            data: csv2table(csv),
+            data: csv2Json(csv),
             searchFields: ["id", "name", "desc"],
             showSearchbar: true,
             itemTemplate: "tmpl-item"
         }
-        // $("#test").searchList(cfg);
-        console.log(csv2table(csv));
+        $("#test").searchList(cfg);
     }
 
-    // 将csv转换成表格
-    function csv2table(csv) {
-    //     var  params = [];  
-    //     for(var i = 0; i < 3; i++){  
-    //         params.push({"group":i,"param":1});  
-    //     }  
-    //       
-    //     var json = JSON.stringify(params); 
-
-
-        var html = '<table>';
+    // 将csv转换成json
+    function csv2Json(csv) {
+        var params = [];
+        var columnNameArray = [];
         var rows = csv.split('\n');
         rows.pop(); // 最后一行没用的
         rows.forEach(function(row, idx) {
             var columns = row.split(',');
             columns.unshift(idx + 1); // 添加行索引
-            if (idx == 0) { // 添加列索引
-                html += '<tr>';
+            // 列名 ABCD
+            // if (idx == 0) { // 添加列索引
+            //     for (var i = 0; i < columns.length; i++) {
+            //         (i == 0 ? '' : String.fromCharCode(65 + i - 1));
+            //     }
+            // }
+            
+            if (idx == 0) {
                 for (var i = 0; i < columns.length; i++) {
-                    html += '<th>' + (i == 0 ? '' : String.fromCharCode(65 + i - 1)) + '</th>';
-                    console.log((i == 0 ? '' : String.fromCharCode(65 + i - 1)));
+                    if(i == 0) continue;
+                    columnNameArray[i] = columns[i];
                 }
-                html += '</tr>';
+            } else {
+                var myResourse= new MyResourse("","","","","","","");
+                for (var i = 0; i < columns.length; i++) {
+                    // param += '"' + columnNameArray[i] + '":"' + columns[i] + '",';
+                    if(i == 0) continue;
+                    switch(columnNameArray[i].toUpperCase()){
+                        case 'ID':myResourse.id = columns[i];break;
+                        case 'NAME':myResourse.name = columns[i];break;
+                        case 'DESC':myResourse.desc = columns[i];break;
+                        case 'FILEURL':myResourse.fileUrl = columns[i];break;
+                        case 'SHOPURL':myResourse.shopUrl = columns[i];break;
+                        case 'IMGURL':myResourse.imgUrl = columns[i];break;
+                        case 'QRCODEURL':myResourse.qrCodeUrl = columns[i];break;
+                        default:break;
+                    }
+                }
+                params.push(myResourse);
             }
-            html += '<tr>';
-            columns.forEach(function(column) {
-                html += '<td>' + column + '</td>';
-                console.log(column);
-            });
-            html += '</tr>';
         });
-        html += '</table>';
-        return html;
+        return params;
     }
     readWorkbookFromRemoteFile("https://zjlloveo0.github.io/share/pass/file/excel/资源共享.xlsm", function callback(workbook) {
-        console.log(workbook);
         readWorkbook(workbook);
-    });
-    
-    $(function(){
-        
     });
     </script>
 </head>
@@ -123,12 +133,11 @@
     <script id="tmpl-item" type="text/x-handlebars-template">
         <div class="item">
             <div class="item__header">
-                <div class="item__pic" style="background-image:url('{{pic}}')"></div>
+                <div class="item__pic" style="background-image:url('{{imgUrl}}')"></div>
                 <div class="item__title-container">
-                    <h3 class="item__name">{{firstName}}</h3>
-                    <h3 class="item__password">密码：s5ss</h3>
-                    <h4 class="item__title">{{title}}</h4>
-                    <a href="https://www.youtube.com/watch?v=cU5VXiiqFJQ" target="_blank">更多资源下载</a>
+                    <h6 class="item__name">{{name}}</h3>
+                    <h7 class="item__title">{{desc}}</h4>
+                    <p><a href="{{fileUrl}}" target="_blank">更多资源下载</a></p>
                 </div>
             </div>
         </div>
