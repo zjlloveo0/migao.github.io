@@ -6,7 +6,7 @@ var data = [
 		bio: "Lorem ipsum",
 		mail: "jr@diff.com",
 		phone:"+58 58 403 404",
-		pic: "https://images.unsplash.com/photo-1541752171745-4176eee47556?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ"
+		pic: "https://zjlloveo0.github.io/share/pass/img/AdobePhotoshop.png"
 	},
 	{
 		firstName: "Allan",
@@ -121,7 +121,7 @@ $.fn.searchList = function(config){
 	
 	$.each(config.data, function(){
 		var $item = $("<div class='search-list__item'>");
-		var source = $("#tmpl-person").html();
+		var source = $("#tmpl-item").html();
 		var template = Handlebars.compile(source);
 		$item.data("object", this);
 		$item.append(template(this));
@@ -136,7 +136,7 @@ var cfg = {
 	data: data,
 	searchFields: ["firstName", "lastName", "title"],
 	showSearchbar: true,
-	itemTemplate: "tmpl-person"
+	itemTemplate: "tmpl-item"
 }
 
 $(function(){

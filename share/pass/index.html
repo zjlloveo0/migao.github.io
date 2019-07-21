@@ -86,7 +86,7 @@
         html += '</table>';
         return html;
     }
-    readWorkbookFromRemoteFile("https://zjlloveo0.github.io/share/pass/file/excel/资源共享密码.xlsm", function callback(workbook) {
+    readWorkbookFromRemoteFile("https://zjlloveo0.github.io/share/pass/file/excel/资源共享.xlsm", function callback(workbook) {
         console.log(workbook);
         readWorkbook(workbook);
     });
@@ -97,21 +97,19 @@
     <div class="container">
         <div id="test"></div>
     </div>
-    <script id="tmpl-person" type="text/x-handlebars-template">
-        <div class="person">
-        <div class="person__header">
-            <div class="person__title-container">
-                <h3 class="person__name">{{lastName}}, {{firstName}}</h3>
-                <h4 class="person__title">{{title}}</h4>
+    <script id="tmpl-item" type="text/x-handlebars-template">
+        <div class="item">
+            <div class="item__header">
+                <div class="item__pic" style="background-image:url('{{pic}}')"></div>
+                <div class="item__title-container">
+                    <h3 class="item__name">{{firstName}}</h3>
+                    <h3 class="item__password">密码：s5ss</h3>
+                    <h4 class="item__title">{{title}}</h4>
+                    <a href="https://www.youtube.com/watch?v=cU5VXiiqFJQ" target="_blank">更多资源下载</a>
+                </div>
             </div>
-            <div class="person__pic" style="background-image:url('{{pic}}')"></div>
         </div>
-        <div class="person__details">
-            <p class="person__mail"><i class="fa fa-at person__icon"></i>{{mail}}</p>
-            <p class="person__phone"><i class="fa fa-phone person__icon"></i>{{phone}}</p>
-        </div>
-    </div>
-</script>
+    </script>
     <svg id="approved" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650.6 650.6">
         <circle class="st0" cx="325.3" cy="325.3" r="323.3" />
         <path class="st1" d="M96.9 274.5l6.1 11.1 11.2 6.1-11.2 6.2-6.1 11.1-6.1-11.1-11.2-6.2 11.2-6.1z" />

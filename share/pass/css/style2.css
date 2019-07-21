@@ -10,10 +10,10 @@ html {
   background-color: whitesmoke;
 }
 
-body {
+/*body {
   font-size: 1.6rem;
   font-family: Montserrat, sans-serif;
-}
+}*/
 
 .container {
   width: 1145px;
@@ -23,7 +23,7 @@ body {
 }
 
 .search-list {
-  margin: 12px 0;
+  /*margin: 12px 0;*/
 }
 .search-list__search-bar {
   margin-bottom: 12px;
@@ -44,27 +44,26 @@ body {
 .search-list__items {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -12px;
 }
 .search-list__item {
   margin-right: 12px;
   margin-bottom: 12px;
 }
 
-.person {
+.item {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   background: linear-gradient(135deg, #fff 0%, #fff 50%, rgba(0, 200, 200, 0.4) 50.5%, rgba(0, 200, 200, 0.6) 100%);
   border-radius: 3px;
   max-width: 100%;
   width: 350px;
 }
-.person__header {
+.item__header {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 12px;
+  padding: 5px;
 }
-.person__pic {
+.item__pic {
   width: 7.5rem;
   min-width: 7.5rem;
   height: 7.5rem;
@@ -72,33 +71,36 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 100%;
-  margin-left: 12px;
-  border: 2px solid white;
+  /*border-radius: 100%;*/
+  margin-left: 0px;
+  /*border: 2px solid white;*/
 }
-.person__title-container {
+.item__title-container {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
+  width: 250px;
+  text-align: left;
+  padding-left: 10px;
 }
-.person__name {
+.item__name {
   margin: 0;
   padding: 0;
   font-size: 2rem;
 }
-.person__title {
+.item__title {
   font-size: 1.6rem;
   font-weight: 400;
   margin: 0;
   padding: 0;
 }
-.person__details {
+.item__details {
   justify-content: space-between;
   padding: 12px;
 }
-.person__icon {
+.item__icon {
   margin-right: 1rem;
 }
-.person__details > p:not(:last-child) {
+.item__details > p:not(:last-child) {
   margin: 0 0 12px 0;
 }
