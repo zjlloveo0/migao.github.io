@@ -34,7 +34,12 @@ a {
 }
 
 .first{
-  height: 10%;
+  height: 200px;
+  width: 100%;
+}
+.first img{
+  width:auto;
+  height:100%;
 }
 
 #approved {
