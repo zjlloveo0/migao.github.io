@@ -52,7 +52,7 @@
             }, 1000);
         }
     }
-    function MyResourse(id,name,desc,fileUrl,shopUrl,imgUrl,qrCodeUrl){
+    function MyResourse(id,name,desc,fileUrl,shopUrl,imgUrl,qrCodeUrl,downloadUrl){
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -60,6 +60,7 @@
         this.shopUrl = shopUrl;
         this.imgUrl = imgUrl;
         this.qrCodeUrl = qrCodeUrl;
+        this.downloadUrl = downloadUrl;
     }
     var url = "";
     function readWorkbook(workbook) {
@@ -104,7 +105,7 @@
                     columnNameArray[i] = columns[i];
                 }
             } else {
-                var myResourse= new MyResourse("","","","","","","");
+                var myResourse= new MyResourse("","","","","","","","");
                 for (var i = 0; i < columns.length; i++) {
                     // param += '"' + columnNameArray[i] + '":"' + columns[i] + '",';
                     if(i == 0) continue;
@@ -120,6 +121,7 @@
                             break;
                         case 'IMGURL':myResourse.imgUrl = columns[i];break;
                         case 'QRCODEURL':myResourse.qrCodeUrl = columns[i];break;
+                        case 'DOWNLOADURL':myResourse.downloadUrl = columns[i];break;
                         default:break;
                     }
                 }
