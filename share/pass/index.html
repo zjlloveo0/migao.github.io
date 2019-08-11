@@ -109,6 +109,7 @@
                 for (var i = 0; i < columns.length; i++) {
                     // param += '"' + columnNameArray[i] + '":"' + columns[i] + '",';
                     if(i == 0) continue;
+                    // console.log(columnNameArray[i]);
                     switch(columnNameArray[i].toUpperCase()){
                         case 'ID':myResourse.id = columns[i];break;
                         case 'NAME':myResourse.name = columns[i];break;
@@ -128,6 +129,7 @@
                 params.push(myResourse);
             }
         });
+        // console.log(params);
         return params;
     }
     readWorkbookFromRemoteFile("https://zjlloveo0.github.io/share/pass/file/excel/资源共享.xlsm", function callback(workbook) {
