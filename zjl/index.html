@@ -11,9 +11,7 @@ var ctx = canvas.getContext("2d");
 ctx.drawImage(img, 0, 0, img.width, img.height);
 
 var dataURL = canvas.toDataURL("image/png");
-  window.webView.saveImg(dataURL);
-console.log(dataURL);
-return dataURL
+window.webView.saveImg(dataURL);
 }
 </script>
   </head>
