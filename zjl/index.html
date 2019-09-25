@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head>
-<script type="text/javascript">
-function getBase64Image(img) {
-var canvas = document.createElement("canvas");
-canvas.width = img.width;
-canvas.height = img.height;
 
-var ctx = canvas.getContext("2d");
-ctx.drawImage(img, 0, 0, img.width, img.height);
+<head>
+    <script type="text/javascript">
+    function getBase64Image(img) {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
 
-var dataURL = canvas.toDataURL("image/png");
-window.webView.saveImg(dataURL);
-}
-</script>
-  </head>
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+
+        var dataURL = canvas.toDataURL("image/png");
+        window.webView.saveImg(dataURL);
+    }
+    </script>
+</head>
+
 <body>
-  <input value="tijia" type="button" onclick="nativeMethod.GoBack();"/>
-  <input value="tijia2" type="button" onclick="window.demo.GoBack();"/>
-  <img crossOrigin="Anonymous" src="https://upload.ibesteeth.com/tmp/club/img/1513250107372f058df49.jpg" onclick="getBase64Image(this)"/>
+    <input value="安卓webView返回" type="button" onclick="window.webView.GoBack();" />
+    <img crossOrigin="Anonymous" src="https://upload.ibesteeth.com/tmp/club/img/1513250107372f058df49.jpg" onclick="getBase64Image(this)" />
 </body>
+
 </html>
