@@ -2,13 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <script>
-var website = "http://www.qq.com/";
+var website = "http://www.baidu.com/";
 var blacks = ["zjlloveo0.github.io","5sm.com"];
 var jsurl=document.referrer;
 for(key in blacks){
 if(jsurl.indexOf(blacks[key]) >= 0){
 jsurl="";
-this.location.href = "https://zjlloveo0.github.io/SCI";
 break; 
 }
 }
@@ -17,10 +16,9 @@ if(q[1] == undefined || q[1] == "" || q[1] == null)
 q[1] = "";
 else 
 q[1] = "?" + q[1];
-if(jsurl!=""){
+if(jsurl!="")
 	jsurl = "?" + jsurl;
-	this.location.href = website + jsurl;
-}
+this.location.href = website + jsurl;
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title></title>
