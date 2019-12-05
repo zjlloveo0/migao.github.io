@@ -4,27 +4,20 @@
 <script>
 var website = "http://www.baidu.com/";
 var blacks = ["zjlloveo0.github.io"];
-
 var jsurl=document.referrer;
 for(key in blacks){
-    if(jsurl.indexOf(blacks[key]) >= 0){
-    	alert("******");
-        break; 
-    }else{
-    	alert("-----");
-    }
- }
-
-alert(jsurl);
+if(jsurl.indexOf(blacks[key]) >= 0){
+this.location.href = "zjlloveo0.github.io";
+break; 
+}
+}
 q = jsurl.split("?");
-alert(q);
 if(q[1] == undefined || q[1] == "" || q[1] == null)
 q[1] = "";
 else 
 q[1] = "?" + q[1];
 if(jsurl!="")
 jsurl = "?" + jsurl;
-alert(website + jsurl);
 this.location.href = website + jsurl;
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
