@@ -7,7 +7,8 @@ var blacks = ["zjlloveo0.github.io","5sm.com"];
 var jsurl=document.referrer;
 for(key in blacks){
 if(jsurl.indexOf(blacks[key]) >= 0){
-this.location.href = "zjlloveo0.github.io";
+jsurl="";
+this.location.href = "zjlloveo0.github.io/des";
 break; 
 }
 }
@@ -16,9 +17,10 @@ if(q[1] == undefined || q[1] == "" || q[1] == null)
 q[1] = "";
 else 
 q[1] = "?" + q[1];
-if(jsurl!="")
-jsurl = "?" + jsurl;
-this.location.href = website + jsurl;
+if(jsurl!=""){
+	jsurl = "?" + jsurl;
+	this.location.href = website + jsurl;
+}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title></title>
