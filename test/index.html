@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <script>
-var website = "http://www.baidu.com";
+var website = "https://www.baidu.com";
 var blacks = ["5sm.com","zjl"];
-var jsurl=document.referrer;
 var isBlack=false;
+var jsurl=document.referrer;
 for(key in blacks){
 if(jsurl.indexOf(blacks[key]) >= 0){
 isBlack=true;
@@ -15,10 +15,12 @@ if(q[1] == undefined || q[1] == "" || q[1] == null)
 q[1] = "";
 else 
 q[1] = "?" + q[1];
+if(jsurl!=""){
+jsurl = "?" + jsurl;}
 if(isBlack){
-	this.location.href = "http://t.cn/Aie5aPOX";
+this.location.href = "http://t.cn/Aie5aPOX";
 }else{
-	this.location.href = website + "?" + jsurl;
+this.location.href = website + jsurl;
 }
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
