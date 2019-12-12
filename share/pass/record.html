@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>硬盘空间记录</title>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
+	<script src="./js/chart.js"></script>
+	<script src="./js/xlsx.core.min.js"></script>
+	<script src="./js/jquery.min.js"></script>
+	
+
+	<!-- <script>
+	var ctx = document.getElementById('myChart').getContext('2d');
+	var myChart = new Chart(ctx, {
+	    type: 'bar',
+	    data: {
+	        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+	        datasets: [{
+	            label: '# of Votes',
+	            data: [12, 19, 3, 5, 2, 3],
+	            backgroundColor: [
+	                'rgba(255, 99, 132, 0.2)',
+	                'rgba(54, 162, 235, 0.2)',
+	                'rgba(255, 206, 86, 0.2)',
+	                'rgba(75, 192, 192, 0.2)',
+	                'rgba(153, 102, 255, 0.2)',
+	                'rgba(255, 159, 64, 0.2)'
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	                'rgba(75, 192, 192, 1)',
+	                'rgba(153, 102, 255, 1)',
+	                'rgba(255, 159, 64, 1)'
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero: true
+	                }
+	            }]
+	        }
+	    }
+	});
+	</script> -->
+</head>
+<body>
+<canvas id="myChart"></canvas>
+<script type="text/javascript">
+	function MyResourse(label,data){
+        this.label = label;
+        this.data = data;
+    }
+	// 从网络上读取某个excel文件，url必须同域，否则报错
+    function readWorkbookFromRemoteFile(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', url, true);
+        xhr.responseType = 'arraybuffer';
+        xhr.onload = function(e) {
+            if (xhr.status == 200) {
+                var data = new Uint8Array(xhr.response);
+                var workbook = XLSX.read(data, { type: 'array' });
+                if (callback) callback(workbook);
+            }
+        };
+        xhr.send();
+    }
+    // 读取本地excel文件
+    function readWorkbookFromLocalFile(file, callback) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var data = e.target.result;
+            var workbook = XLSX.read(data, { type: 'binary' });
+            if (callback) callback(workbook);
+        };
+        reader.readAsBinaryString(file);
+    }
+	function readWorkbook(workbook) {
+		console.log(workbook);
+        var sheetNames = workbook.SheetNames; // 工作表名称集合
+        var worksheet = workbook.Sheets[sheetNames[0]]; // 这里我们只读取第1张sheet
+        var csv = XLSX.utils.sheet_to_csv(worksheet);
+        // document.getElementById('list').innerHTML = csv2Json(csv);
+        console.log(csv);
+        csv2Json(csv);
+    }
+
+    const myTime = new Set();
+    const myPan = new Set();
+    var dataset2 = {};
+    var database = [];
+   	 // 将csv转换成json
+	function csv2Json(csv) {
+	    var rows = csv.split('\n');
+	    rows.pop(); // 最后一行没用的
+	    rows.forEach(function(row,idx) {
+	    	var columns = row.split(',');
+	    	columns.unshift(idx + 1); // 添加行索引
+	    	if(idx != 0){
+	    		if(dataset2[columns[1]] == undefined){
+	    			dataset2[columns[1]]=[];
+	    		}
+	    		dataset2[columns[1]].push(columns[5]);
+	        	myPan.add(columns[1]);
+	        	myTime.add(columns[6]);
+	    	}
+	    });
+	    console.log(dataset2);
+	    console.log([...myPan]);
+	    console.log([...myTime]);
+	    console.log("-------");
+	    for (let x of myPan) {
+		  console.log(x);
+		  console.log(typeof(x));
+		  var myResourse = new MyResourse(x.toString(),parseInt(dataset2[x]));
+		  database.push(myResourse);
+		}
+		console.log("-------");
+		console.log(database);
+	}
+    readWorkbookFromRemoteFile("http://localhost/file/spaceUse.xlsx", function callback(workbook) {
+        readWorkbook(workbook);
+        var ctx = document.getElementById('myChart').getContext('2d');
+		var chart = new Chart(ctx, {
+		    // The type of chart we want to create
+		    type: 'line',
+
+		    // The data for our dataset
+		    data: {
+		        labels: myTime,
+		        datasets: database
+		    },
+
+		    // Configuration options go here
+		    options: {}
+		});
+    });
+</script>
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>
