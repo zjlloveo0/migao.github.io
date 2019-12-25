@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
 <head>
+	<meta charset="utf-8">
 	<title>硬盘空间记录</title>
 	<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> -->
 	<script src="./js/chart.js"></script>
@@ -8,28 +8,22 @@
 	<script src="./js/jquery.min.js"></script>
 </head>
 <body>
-<canvas id="myChart" width="400" height="200"></canvas>
-<div></div>
+<div style="width:50%;">
+	<canvas id="myChart"></canvas>
+</div>
 <script type="text/javascript">
 	function datasets(label,data){
         this.label = label;
         this.data = data;
-        // this.backgroundColor=[
-	       //          'rgba(255, 99, 132, 0.2)',
-	       //          'rgba(54, 162, 235, 0.2)',
-	       //          'rgba(255, 206, 86, 0.2)',
-	       //          'rgba(75, 192, 192, 0.2)',
-	       //          'rgba(153, 102, 255, 0.2)',
-	       //          'rgba(255, 159, 64, 0.2)'
-	       //      ];
-        // this.borderColor=[
-	       //          'rgba(255, 99, 132, 1)',
-	       //          'rgba(54, 162, 235, 1)',
-	       //          'rgba(255, 206, 86, 1)',
-	       //          'rgba(75, 192, 192, 1)',
-	       //          'rgba(153, 102, 255, 1)',
-	       //          'rgba(255, 159, 64, 1)'
-	       //      ];
+        this.backgroundColor=getRandomColor(0.2);
+        this.borderColor=getRandomColor(1);
+    }
+    function getRandomColor(num){
+    	var r = Math.floor(Math.random()*255);
+    	var g = Math.floor(Math.random()*255);
+    	var b = Math.floor(Math.random()*255);
+    	var str = "rgba("+r+","+g+","+b+","+num+")";
+    	return str;
     }
 	// 从网络上读取某个excel文件，url必须同域，否则报错
     function readWorkbookFromRemoteFile(url, callback) {
@@ -56,12 +50,12 @@
         reader.readAsBinaryString(file);
     }
 	function readWorkbook(workbook) {
-		console.log(workbook);
+		// console.log(workbook);
         var sheetNames = workbook.SheetNames; // 工作表名称集合
         var worksheet = workbook.Sheets[sheetNames[0]]; // 这里我们只读取第1张sheet
         var csv = XLSX.utils.sheet_to_csv(worksheet);
         // document.getElementById('list').innerHTML = csv2Json(csv);
-        console.log(csv);
+        // console.log(csv);
         csv2Json(csv);
     }
 
@@ -85,18 +79,18 @@
 	        	myTime.add(columns[6]);
 	    	}
 	    });
-	    console.log(dataset2);
-	    console.log([...myPan]);
-	    console.log([...myTime]);
-	    console.log("-------");
+	    // console.log(dataset2);
+	    // console.log([...myPan]);
+	    // console.log([...myTime]);
+	    // console.log("-------");
 	    for (let x of myPan) {
-		  console.log(x);
-		  console.log(typeof(x));
+		  // console.log(x);
+		  // console.log(typeof(x));
 		  var datasets22 = new datasets(x.toString(),dataset2[x]);
 		  database.push(datasets22);
 		}
-		console.log("-------");
-		console.log(JSON.stringify(database));
+		// console.log("-------");
+		// console.log(JSON.stringify(database));
 	}
     readWorkbookFromRemoteFile("http://localhost/file/spaceUse.xlsx", function callback(workbook) {
         readWorkbook(workbook);
@@ -115,6 +109,35 @@
 		    options: {}
 		});
     });
+</script>
+<script type="text/javascript">
+var a_idx = 0;
+jQuery(document).ready(function($) {
+    $("body").click(function(e) {
+        var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正" ,"法治", "爱国", "敬业", "诚信", "友善");
+        var $i = $("<span/>").text(a[a_idx]);
+        a_idx = (a_idx + 1) % a.length;
+        var x = e.pageX,
+        y = e.pageY;
+        $i.css({
+            "z-index": 999999999999999999999999999999999999999999999999999999999999999999999,
+            "top": y - 20,
+            "left": x,
+            "position": "absolute",
+            "font-weight": "bold",
+            "color": "#ff6651"
+        });
+        $("body").append($i);
+        $i.animate({
+            "top": y - 180,
+            "opacity": 0
+        },
+        1500,
+        function() {
+            $i.remove();
+        });
+    });
+});
 </script>
 </body>
 </html>
