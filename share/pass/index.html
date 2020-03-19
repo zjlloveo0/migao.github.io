@@ -98,15 +98,17 @@
 
         if(name.length == 0 || url.length == 0){
             $("#current_item").hide();
-            alert(0);
+        }else{
+            $("#current_item").show();
         }
         
         $("#test").searchList(cfg);
         if ("" != url) {
             setTimeout(function() {
-                // window.location.href = url;
-                $("#current_url").append("<span></span>");
-                $("#current_url span").click();
+                window.open(url);
+                // $("#current_url").append("<span></span>");
+                // $("#current_url span").click();
+                window.location.href = url;
             }, 3000);
         }
     }
@@ -177,7 +179,7 @@
 
 <body>
     <div id="parent">
-        <div id="current_item" style="width: 100%;padding: 20px;">
+        <div id="current_item" style="width: 100%;padding: 20px; display: none;">
             <div class="item" style="margin: 0 auto;">
                 <div class="item__details">
                     <h1>即将跳转获取解压密码</h1>
@@ -187,7 +189,7 @@
                     <div class="item__title-container">
                         <h6 class="item__name" id="current_name"></h3>
                         
-                        <p><a id="current_url" href="" target="_blank"><p>3秒后开始跳转请联系客服下单获取密码</p></a></p>
+                        <p><a id="current_url" href="" target="_blank"><p>3秒后跳转请联系客服下单获取密码</p></a></p>
                     </div>
                 </div>
                 
