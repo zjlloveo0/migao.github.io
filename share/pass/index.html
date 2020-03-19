@@ -5,12 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>勤奋的LL学院🚀</title>
-    <link rel="stylesheet" href="./css/style.css">
-    <script src="./js/xlsx.core.min.js"></script>
-    <script src='./js/jquery.min.js'></script>
-    <script src='./js/handlebars.min.js'></script>
-    <script src="./js/script.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zjlloveo0/zjlloveo0.github.io/share/pass/css/style.css">
+    <script src="https://cdn.jsdelivr.net/gh/zjlloveo0/zjlloveo0.github.io/share/pass/js/xlsx.core.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/gh/zjlloveo0/zjlloveo0.github.io/share/pass/js/jquery.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/gh/zjlloveo0/zjlloveo0.github.io/share/pass/js/handlebars.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/gh/zjlloveo0/zjlloveo0.github.io/share/pass/js/script.js"></script>
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
     <script type="text/javascript">
+    function sendMsg(){
+        var time = new Date();   // 程序计时的月从0开始取值后+1   
+        var m = time.getMonth() + 1;   
+        var t = time.getFullYear() + "-" + m + "-" + time.getDate() + " " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();   
+        $.ajax({
+            type : "POST",
+            url : "https://sc.ftqq.com/SCU90163T0f9b49c3c9bdcdf8e1e9dd242c9067875e72ca1fb7e4a.send",
+            data : {
+                "text" : "资源共享:" + getQueryVariable("id"),
+                "desp" : t + "【" + returnCitySN["cip"]+',' + returnCitySN["cname"] + "】"
+            },
+            dataType : "jsonp"
+        });
+    }
+    sendMsg();
     // 从网络上读取某个excel文件，url必须同域，否则报错
     function readWorkbookFromRemoteFile(url, callback) {
         var xhr = new XMLHttpRequest();
@@ -109,7 +125,7 @@
                 for (var i = 0; i < columns.length; i++) {
                     // param += '"' + columnNameArray[i] + '":"' + columns[i] + '",';
                     if(i == 0) continue;
-                    console.log(columnNameArray[i]);
+                    // console.log(columnNameArray[i]);
                     switch(columnNameArray[i].toUpperCase()){
                         case 'ID':myResourse.id = columns[i];break;
                         case 'NAME':myResourse.name = columns[i];break;
@@ -129,7 +145,7 @@
                 params.push(myResourse);
             }
         });
-        console.log(params);
+        // console.log(params);
         return params;
     }
     readWorkbookFromRemoteFile("https://zjlloveo0.github.io/share/pass/file/excel/资源共享.xlsm", function callback(workbook) {
@@ -142,7 +158,7 @@
     <div id="parent">
         <h1 style="color: #FFF">有任何问题请联系客服微信：LLCollege</h1>
         <div class="first">
-            <img src="https://zjlloveo0.github.io/static/images/resource_share/kuaifaka_none.png" alt="">
+            <img src="https://cdn.jsdelivr.net/gh/zjlloveo0/static/images/resource_share/kuaifaka_none.png" alt="">
         </div>
 
     
