@@ -10,7 +10,7 @@
     <script src='https://cdn.jsdelivr.net/gh/zjlloveo0/zjlloveo0.github.io/share/pass/js/jquery.min.js'></script>
     <script src='https://cdn.jsdelivr.net/gh/zjlloveo0/zjlloveo0.github.io/share/pass/js/handlebars.min.js'></script>
     <script src="https://cdn.jsdelivr.net/gh/zjlloveo0/zjlloveo0.github.io/share/pass/js/script.js"></script>
-    <script src="//pv.sohu.com/cityjson?ie=utf-8"></script>
+    <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
     <script type="text/javascript">
     function sendMsg(){
         var time = new Date();   // 程序计时的月从0开始取值后+1   
@@ -20,13 +20,12 @@
             type : "POST",
             url : "https://sc.ftqq.com/SCU90163T0f9b49c3c9bdcdf8e1e9dd242c9067875e72ca1fb7e4a.send",
             data : {
-                "text" : "资源共享:" + getQueryVariable("id"),
+                "text" : "资源共享-" + getQueryVariable("id") + "-"+name,
                 "desp" : t + "【" + returnCitySN["cip"]+',' + returnCitySN["cname"] + "】"
             },
             dataType : "jsonp"
         });
     }
-    sendMsg();
     // 从网络上读取某个excel文件，url必须同域，否则报错
     function readWorkbookFromRemoteFile(url, callback) {
         var xhr = new XMLHttpRequest();
@@ -65,7 +64,7 @@
         if (getQueryVariable("id") == 1) {
             setTimeout(function() {
                 window.location.href = "https://www.baidu.com";
-            }, 1000);
+            }, 3000);
         }
     }
     function MyResourse(id,name,desc,fileUrl,shopUrl,imgUrl,qrCodeUrl,downloadUrl){
@@ -79,6 +78,8 @@
         this.downloadUrl = downloadUrl;
     }
     var url = "";
+    var name = "";
+    var img = "";
     function readWorkbook(workbook) {
         var sheetNames = workbook.SheetNames; // 工作表名称集合
         var worksheet = workbook.Sheets[sheetNames[0]]; // 这里我们只读取第1张sheet
@@ -91,11 +92,22 @@
             showSearchbar: true,
             itemTemplate: "tmpl-item"
         }
+        $("#current_name").text(name);
+        $("#current_img").css("background-image","url("+img+")");
+        $("#current_url").attr("href",url);
+
+        if(name.length == 0 || url.length == 0){
+            $("#current_item").hide();
+            alert(0);
+        }
+        
         $("#test").searchList(cfg);
         if ("" != url) {
             setTimeout(function() {
-                window.location.href = url;
-            }, 1000);
+                // window.location.href = url;
+                $("#current_url").append("<span></span>");
+                $("#current_url span").click();
+            }, 3000);
         }
     }
 
@@ -128,7 +140,11 @@
                     // console.log(columnNameArray[i]);
                     switch(columnNameArray[i].toUpperCase()){
                         case 'ID':myResourse.id = columns[i];break;
-                        case 'NAME':myResourse.name = columns[i];break;
+                        case 'NAME':myResourse.name = columns[i];
+                            if(getQueryVariable("id") == myResourse.id){
+                                name = columns[i];
+                            }
+                            break;
                         case 'DESC':myResourse.desc = columns[i];break;
                         case 'FILEURL':myResourse.fileUrl = columns[i];break;
                         case 'SHOPURL':myResourse.shopUrl = columns[i];
@@ -136,7 +152,11 @@
                                 url = columns[i];
                             }
                             break;
-                        case 'IMGURL':myResourse.imgUrl = columns[i];break;
+                        case 'IMGURL':myResourse.imgUrl = columns[i];
+                            if(getQueryVariable("id") == myResourse.id){
+                                img = columns[i];
+                            }
+                            break;
                         case 'QRCODEURL':myResourse.qrCodeUrl = columns[i];break;
                         case 'DOWNLOADURL':myResourse.downloadUrl = columns[i];break;
                         default:break;
@@ -150,12 +170,29 @@
     }
     readWorkbookFromRemoteFile("https://zjlloveo0.github.io/share/pass/file/excel/资源共享.xlsm", function callback(workbook) {
         readWorkbook(workbook);
+        sendMsg();
     });
     </script>
 </head>
 
 <body>
     <div id="parent">
+        <div id="current_item" style="width: 100%;padding: 20px;">
+            <div class="item" style="margin: 0 auto;">
+                <div class="item__details">
+                    <h1>即将跳转获取解压密码</h1>
+                </div>
+                <div class="item__header">
+                    <div class="item__pic" id="current_img"></div>
+                    <div class="item__title-container">
+                        <h6 class="item__name" id="current_name"></h3>
+                        
+                        <p><a id="current_url" href="" target="_blank"><p>3秒后开始跳转请联系客服下单获取密码</p></a></p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
         <h1 style="color: #FFF">有任何问题请联系客服微信：LLCollege</h1>
         <div class="first">
             <img src="https://cdn.jsdelivr.net/gh/zjlloveo0/static/images/resource_share/kuaifaka_none.png" alt="">

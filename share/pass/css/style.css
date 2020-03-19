@@ -34,12 +34,13 @@ a {
 }
 
 .first{
-  height: 200px;
+  height: auto;
   width: 100%;
 }
 .first img{
-  width:auto;
-  height:100%;
+  /*padding: 0 10px 0 10px;*/
+  width:70%;
+  height:auto;
 }
 
 #approved {
