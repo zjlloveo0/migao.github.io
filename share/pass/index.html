@@ -1,56 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>勤奋的LL学院🚀</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/zjlloveo0/zjlloveo0.github.io/share/pass/css/style.css">
-    <script src="https://cdn.jsdelivr.net/gh/zjlloveo0/zjlloveo0.github.io/share/pass/js/xlsx.core.min.js"></script>
-    <script src='https://cdn.jsdelivr.net/gh/zjlloveo0/zjlloveo0.github.io/share/pass/js/jquery.min.js'></script>
-    <script src='https://cdn.jsdelivr.net/gh/zjlloveo0/zjlloveo0.github.io/share/pass/js/handlebars.min.js'></script>
-    <script src="https://cdn.jsdelivr.net/gh/zjlloveo0/zjlloveo0.github.io/share/pass/js/script.js"></script>
-    <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
     <script type="text/javascript">
-    function sendMsg(){
-        var time = new Date();   // 程序计时的月从0开始取值后+1   
-        var m = time.getMonth() + 1;   
-        var t = time.getFullYear() + "-" + m + "-" + time.getDate() + " " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds();   
-        $.ajax({
-            type : "POST",
-            url : "https://sc.ftqq.com/SCU90163T0f9b49c3c9bdcdf8e1e9dd242c9067875e72ca1fb7e4a.send",
-            data : {
-                "text" : "资源共享-" + getQueryVariable("id") + "-"+name,
-                "desp" : t + "【" + returnCitySN["cip"]+',' + returnCitySN["cname"] + "】"
-            },
-            dataType : "jsonp"
-        });
-    }
-    // 从网络上读取某个excel文件，url必须同域，否则报错
-    function readWorkbookFromRemoteFile(url, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('get', url, true);
-        xhr.responseType = 'arraybuffer';
-        xhr.onload = function(e) {
-            if (xhr.status == 200) {
-                var data = new Uint8Array(xhr.response);
-                var workbook = XLSX.read(data, { type: 'array' });
-                if (callback) callback(workbook);
-            }
-        };
-        xhr.send();
-    }
-    // 读取本地excel文件
-    function readWorkbookFromLocalFile(file, callback) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            var data = e.target.result;
-            var workbook = XLSX.read(data, { type: 'binary' });
-            if (callback) callback(workbook);
-        };
-        reader.readAsBinaryString(file);
-    }
-
     function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
         var vars = query.split("&");
@@ -61,186 +14,14 @@
         return (false);
     }
     window.onload = function() {
-        if (getQueryVariable("id") == 1) {
-            setTimeout(function() {
-                window.location.href = "https://www.baidu.com";
-            }, 5000);
-        }
-    }
-    function MyResourse(id,name,desc,fileUrl,shopUrl,imgUrl,qrCodeUrl,downloadUrl){
-        this.id = id;
-        this.name = name;
-        this.desc = desc;
-        this.fileUrl = fileUrl;
-        this.shopUrl = shopUrl;
-        this.imgUrl = imgUrl;
-        this.qrCodeUrl = qrCodeUrl;
-        this.downloadUrl = downloadUrl;
-    }
-    var url = "";
-    var name = "";
-    var img = "";
-    function readWorkbook(workbook) {
-        var sheetNames = workbook.SheetNames; // 工作表名称集合
-        var worksheet = workbook.Sheets[sheetNames[0]]; // 这里我们只读取第1张sheet
-        var csv = XLSX.utils.sheet_to_csv(worksheet);
-        // document.getElementById('list').innerHTML = csv2Json(csv);
-        
-        var cfg = {
-            data: csv2Json(csv),
-            searchFields: ["id", "name", "desc"],
-            showSearchbar: true,
-            itemTemplate: "tmpl-item"
-        }
-        $("#current_name").text(name);
-        $("#current_img").css("background-image","url("+img+")");
-        $("#current_url").attr("href",url);
-
-        if(name.length == 0 || url.length == 0){
-            $("#current_item").hide();
+        if (getQueryVariable("id")) {
+            window.location.href = "http://mrzhou.icu/share/order.html?id="+getQueryVariable("id");
         }else{
-            $("#current_item").show();
-        }
-        
-        $("#test").searchList(cfg);
-        if ("" != url) {
-            setTimeout(function() {
-                window.open(url);
-                // $("#current_url").append("<span></span>");
-                // $("#current_url span").click();
-                window.location.href = url;
-            }, 3000);
+            window.location.href = "https://item.taobao.com/item.htm?id=613218106914";
         }
     }
-
-    // 将csv转换成json
-    function csv2Json(csv) {
-        var params = [];
-        var columnNameArray = [];
-        var rows = csv.split('\n');
-        rows.pop(); // 最后一行没用的
-        rows.forEach(function(row, idx) {
-            var columns = row.split(',');
-            columns.unshift(idx + 1); // 添加行索引
-            // 列名 ABCD
-            // if (idx == 0) { // 添加列索引
-            //     for (var i = 0; i < columns.length; i++) {
-            //         (i == 0 ? '' : String.fromCharCode(65 + i - 1));
-            //     }
-            // }
-            
-            if (idx == 0) {
-                for (var i = 0; i < columns.length; i++) {
-                    if(i == 0) continue;
-                    columnNameArray[i] = columns[i];
-                }
-            } else {
-                var myResourse= new MyResourse("","","","","","","","");
-                for (var i = 0; i < columns.length; i++) {
-                    // param += '"' + columnNameArray[i] + '":"' + columns[i] + '",';
-                    if(i == 0) continue;
-                    // console.log(columnNameArray[i]);
-                    switch(columnNameArray[i].toUpperCase()){
-                        case 'ID':myResourse.id = columns[i];break;
-                        case 'NAME':myResourse.name = columns[i];
-                            if(getQueryVariable("id") == myResourse.id){
-                                name = columns[i];
-                            }
-                            break;
-                        case 'DESC':myResourse.desc = columns[i];break;
-                        case 'FILEURL':myResourse.fileUrl = columns[i];break;
-                        case 'SHOPURL':myResourse.shopUrl = columns[i];
-                            if(getQueryVariable("id") == myResourse.id){
-                                url = columns[i];
-                            }
-                            break;
-                        case 'IMGURL':myResourse.imgUrl = columns[i];
-                            if(getQueryVariable("id") == myResourse.id){
-                                img = columns[i];
-                            }
-                            break;
-                        case 'QRCODEURL':myResourse.qrCodeUrl = columns[i];break;
-                        case 'DOWNLOADURL':myResourse.downloadUrl = columns[i];break;
-                        default:break;
-                    }
-                }
-                params.push(myResourse);
-            }
-        });
-        // console.log(params);
-        return params;
-    }
-    readWorkbookFromRemoteFile("https://zjlloveo0.github.io/share/pass/file/excel/资源共享.xlsm", function callback(workbook) {
-        readWorkbook(workbook);
-        sendMsg();
-    });
     </script>
 </head>
-
 <body>
-    <div id="parent">
-        <div id="current_item" style="width: 100%;padding: 20px; display: none;">
-            <div class="item" style="margin: 0 auto;">
-                <div class="item__details">
-                    <h1>即将跳转获取解压密码</h1>
-                </div>
-                <div class="item__header">
-                    <div class="item__pic" id="current_img"></div>
-                    <div class="item__title-container">
-                        <h6 class="item__name" id="current_name"></h3>
-                        <p><a id="current_url" href="" target="_blank"><p>5秒后跳转请联系客服下单获取密码</p></a></p>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        <h1 style="color: #FFF">有任何问题请联系客服微信：LLCollege</h1>
-        <div class="first">
-            <img src="https://cdn.jsdelivr.net/gh/zjlloveo0/static/images/resource_share/kuaifaka_none.png" alt="">
-        </div>
-
-    
-    <script id="tmpl-item" type="text/x-handlebars-template">
-        <div class="item">
-            <div class="item__header">
-                <div class="item__pic" style="background-image:url('{{imgUrl}}')"></div>
-                <div class="item__title-container">
-                    <h6 class="item__name">{{name}}</h3>
-                    
-                    <p><a href="{{fileUrl}}" target="_blank">前往下载</a></p>
-                </div>
-            </div>
-            <div class="item__details">
-                <h7 class="item__title">{{desc}}</h4>
-            </div>
-        </div>
-    </script>
-    <svg id="approved" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650.6 650.6">
-        <circle class="st0" cx="325.3" cy="325.3" r="323.3" />
-        <path class="st1" d="M96.9 274.5l6.1 11.1 11.2 6.1-11.2 6.2-6.1 11.1-6.1-11.1-11.2-6.2 11.2-6.1z" />
-        <circle class="st1" cx="141.7" cy="473.6" r="5.7" />
-        <circle class="st1" cx="213.7" cy="143.7" r="5.7" />
-        <circle class="st1" cx="474.3" cy="133.9" r="5.7" />
-        <circle class="st1" cx="544.1" cy="279.8" r="5.7" />
-        <circle class="st1" cx="510.7" cy="468" r="5.7" />
-        <g class="rocket">
-            <path d="M325.3 62s110.9 201.8 19.3 405l-9.6 25.7h-19.3l-9.6-25.7c-91.7-203.1 19.2-405 19.2-405z" fill="#fa3757" stroke="#13192d" stroke-width="4" stroke-miterlimit="10" />
-            <path class="st3" d="M344.5 467.1l-9.6 25.7h-19.2l-9.6-25.7c12.2 2.8 25.1 2.6 38.4 0zM359.2 149.6c-15.6-53.8-34-87.6-34-87.6s-18.3 33.5-33.8 86.9c19.5 6.6 42.8 5.5 67.8.7zM277.1 375s50.5 6.8 96.3 0l-3.7 17.6s-44.5 5.4-88.9 0l-3.7-17.6zM282.8 400.3s45.6 5.8 84.9 0l-4.3 15.1s-38.1 4.6-76.3 0l-4.3-15.1z" />
-            <path class="st3" d="M328.1 478.7c0 60.6-1.3 109.7-2.8 109.7-1.6 0-2.8-49.1-2.8-109.7s1.3-126 2.8-126c1.5.1 2.8 65.4 2.8 126zM247.6 343.7s-23.1 96.4-2.2 226.1c0 0 10.4-126.6 45.8-140.7 0 0-7.1-24.2-10.1-35.2 0 .1-36.2-8-33.5-50.2zM402.9 343.7s23.1 96.4 2.2 226.1c0 0-10.4-126.6-45.8-140.7 0 0 7.1-24.2 10.1-35.2 0 .1 36.2-8 33.5-50.2z" />
-            <g>
-                <circle class="st0" cx="325.3" cy="313.8" r="14.9" />
-                <circle class="st0" cx="325.3" cy="260.4" r="14.9" />
-            </g>
-        </g>
-        <circle class="st4" cx="360.9" cy="550.9" r="15.5" />
-        <circle class="st4" cx="287.8" cy="594.8" r="26.9" />
-    </svg>
-    <!-- <p><a href="https://www.youtube.com/watch?v=cU5VXiiqFJQ" target="_blank">更多资源下载</a></p> -->
-    <div class="container">
-        <div id="test"></div>
-    </div>
-    </div>
-
 </body>
-
 </html>
