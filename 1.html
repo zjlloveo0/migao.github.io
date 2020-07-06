@@ -2,7 +2,9 @@
 <html>
 <head> 
 <meta charset="utf-8"> 
-<title>菜鸟教程(runoob.com)</title> 
+<title>支付</title> 
+<script type="text/javascript" src="http://mrzhou.icu/mrzhou/js/jquery.min.js"></script>
+
 </head>
 <body>
 <!-- clientId:1
@@ -12,12 +14,17 @@ totalFee:1
 outOrderNo:12345611110000
 notifyUrl:http://mrzhou.icu
 callBackUrl:http://mrzhou.icu -->
-<form action="http://run.buybal.com/openpayapi/v1.0/cashier/JsPay?clientId=1&merchantId=95116323&mchntName=rcb&totalFee=1&outOrderNo=202007030001&notifyUrl=1&callBackUrl=1&sign=48ecccb6ba6a5160d350b14997416500" method="POST">
+<input type="text" name="url" id="url">
+<form id="form" method="POST">
 
 <input type="submit" value="提交">
 </form>
-
-<p>点击"提交"按钮，表单数据将被发送到服务器上的“demo-form.php”。</p>
-
 </body>
+<script type="text/javascript">
+	$('#url').change(function(){
+		alert(1);
+		$('#form').attr('action',$('#url').val());
+	});
+</script>
 </html>
+
